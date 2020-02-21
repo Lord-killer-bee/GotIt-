@@ -97,6 +97,10 @@ public class InputHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 previousSwipeEndTimeStamp = DateTime.Now;
 
                 Debug.Log("Swipe successful!!");
+
+                if(succesfulSwipeCount < maxSwipesForLaunch - 1)
+                    rocket.BurstOnce();
+
                 score += (timeIntervals[succesfulSwipeCount] - (float)(previousSwipeEndTimeStamp - pressedTimeStamp).TotalSeconds);
 
                 Debug.Log("Current score : " + (timeIntervals[succesfulSwipeCount] - (float)(previousSwipeEndTimeStamp - pressedTimeStamp).TotalSeconds));
@@ -106,6 +110,7 @@ public class InputHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 if (succesfulSwipeCount >= maxSwipesForLaunch)
                 {
                     Debug.Log("RocketLaunched!!");
+                    rocket.EnableTrail();
                     roundActive = false;
                     rocket.LaunchRocket();
                     camera.WatchRocket();

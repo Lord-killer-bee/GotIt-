@@ -5,10 +5,14 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     [SerializeField] private GameObject successPanel;
+
+    [SerializeField] private ParticleSystem burstParticles;
+    [SerializeField] private ParticleSystem trailParticles;
+
     bool launchInitiated = false;
 
-    private Vector3 startPosition = new Vector3(-0.61f, 0, 0);
-    private Vector3 finalPosition = new Vector3(-0.61f, 45, 0);
+    private Vector3 startPosition = new Vector3(-1f, 0, 0);
+    private Vector3 finalPosition = new Vector3(-1f, 45, 0);
 
     private void Update()
     {
@@ -22,6 +26,16 @@ public class Rocket : MonoBehaviour
                 successPanel.SetActive(true);
             }
         }
+    }
+
+    public void BurstOnce()
+    {
+        burstParticles.Play();
+    }
+
+    public void EnableTrail()
+    {
+        trailParticles.Play();
     }
 
     public void LaunchRocket()
